@@ -1,0 +1,32 @@
+import heapq
+
+def main():
+    h1 = []
+    h2 = []
+    heapq.heapify(h1)
+    heapq.heapify(h2)
+    ans = []
+
+    n = int(input().strip())
+    for i in range(n):
+        eT, pT = map(int, input().split())
+        heapq.heappush(h1, (eT,pT,i))
+
+    cT = h1[0][0]
+    while h1 or h2:
+        if h1:
+            while h1 and h1[0][0] <= cT:
+                eT, pT, i = heapq.heappop(h1)
+                heapq.heappush(h2, (pT,i))
+        if h2:
+            pT, i = heapq.heappop(h2)
+            cT += pT
+            ans.append(i)
+        else:
+            if h1:
+                cT = h1[0][0]
+
+    print(' '.join(map(str, ans)))
+
+if __name__ == '__main__':
+    main()
