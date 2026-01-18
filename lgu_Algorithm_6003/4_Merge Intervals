@@ -1,0 +1,33 @@
+def merge_intervals(intervals):
+    # 按起点排序
+    intervals.sort(key=lambda x: x[0])
+    
+    merged = []
+    for start, end in intervals:
+        # 如果 merged 为空 或 当前区间与上一个不重叠
+        if not merged or start > merged[-1][1]:
+            merged.append([start, end])
+        else:
+            # 有重叠或相接，合并区间
+            merged[-1][1] = max(merged[-1][1], end)
+    
+    return merged
+
+
+def main():
+    n = int(input().strip())
+    intervals = []
+    
+    for _ in range(n):
+        start, end = map(int, input().split())
+        intervals.append([start, end])
+    
+    merged = merge_intervals(intervals)
+    
+    print(len(merged))
+    for s, e in merged:
+        print(s, e)
+
+
+if __name__ == "__main__":
+    main()
