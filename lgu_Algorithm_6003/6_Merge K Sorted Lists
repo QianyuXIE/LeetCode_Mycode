@@ -1,0 +1,19 @@
+import heapq
+
+def main():
+    h = []
+    heapq.heapify(h)
+    k = int(input().strip())
+    for _ in range(k):
+        line = list(map(int, input().split()))
+        l = line[0]
+        for i in range(1, l+1):
+            heapq.heappush(h, line[i])
+    n = len(h)
+    print(n)
+    if n:
+        for _ in range(n):
+            print(heapq.heappop(h), end=' ')
+
+if __name__ == '__main__':
+    main()
