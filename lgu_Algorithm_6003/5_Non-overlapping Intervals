@@ -1,0 +1,27 @@
+def count_non_overlapping(intervals):
+    # sort by end time
+    intervals.sort(key=lambda x: x[1])
+
+    count = 0
+    last_end = -10**9
+
+    for start, end in intervals:
+        if start >= last_end:
+            # no overlap, then keep
+            count += 1
+            last_end = end
+    return count
+
+
+def main():
+    n = int(input().strip())
+    intervals = []
+    for _ in range(n):
+        start, end = map(int, input().split())
+        intervals.append([start,end])
+
+    count = count_non_overlapping(intervals)
+    print(n - count)
+
+if __name__ == '__main__':
+    main()
